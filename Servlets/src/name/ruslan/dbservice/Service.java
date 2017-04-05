@@ -36,7 +36,7 @@ public class Service {
     	 String result = "";
          
     	 PreparedStatement stmt;
-		try {
+		 try {
 			stmt = con.prepareStatement("SELECT phrase FROM auth WHERE name = ?");
 	         stmt.setString(1, userName);
 	         ResultSet rs = stmt.executeQuery();

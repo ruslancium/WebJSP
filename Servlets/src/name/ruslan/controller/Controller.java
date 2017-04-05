@@ -14,8 +14,19 @@ import name.ruslan.command.factory.ActionFactory;
 import name.ruslan.resource.ConfigurationManager;
 import name.ruslan.resource.MessageManager;
 
-@WebServlet("/controller")
+@WebServlet("/Controller")
 public class Controller extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public void init() throws ServletException {}
+	
+	public Controller() {
+		super();
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request, response);
 	}
