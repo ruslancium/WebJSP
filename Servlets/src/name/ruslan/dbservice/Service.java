@@ -4,11 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import name.ruslan.model.User;
 
 
 public class Service {
@@ -37,7 +41,7 @@ public class Service {
          
     	 PreparedStatement stmt;
 		 try {
-			stmt = con.prepareStatement("SELECT phrase FROM auth WHERE name = ?");
+			 stmt = con.prepareStatement("SELECT phrase FROM auth WHERE name = ?");
 	         stmt.setString(1, userName);
 	         ResultSet rs = stmt.executeQuery();
 	         
@@ -55,4 +59,31 @@ public class Service {
 
 		return result;    	
     }
+    
+    public List<User> getUsers() {
+    	List<User> v = new ArrayList();
+
+   	 PreparedStatement stmt;
+		 try {
+			 stmt = con.prepareStatement("SELECT name, phrase FROM auth;");        
+	         
+	         ResultSet rs = stmt.executeQuery();
+	         
+	         User user = new User();
+	         while (rs.next()) {
+	             user.setUserName(rs.getString(1));
+	             user.setPassPhrase(rs.getString(1));
+	             v.add(user);
+	         }
+	         
+	         rs.close();
+	         stmt.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return v;
+	}
 }
